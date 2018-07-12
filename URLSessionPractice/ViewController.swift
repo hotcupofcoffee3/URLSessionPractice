@@ -35,6 +35,8 @@ class ViewController: UIViewController {
     
     var uvIndex = Double()
     
+    var iconForPngDisplay = String()
+    
     let apiKeys = API()
     
     
@@ -61,6 +63,7 @@ class ViewController: UIViewController {
 //                            print("Lat: \(location.coordinate.latitude)")
 //
 //                            print("Lon: \(location.coordinate.longitude)")
+                            
                             self.getUVIndexFromLatAndLon(zip: zip, lat: location.coordinate.latitude, lon: location.coordinate.longitude)
                             
                         }
@@ -78,6 +81,7 @@ class ViewController: UIViewController {
     func getUVIndexFromLatAndLon(zip: Int, lat: Double, lon: Double) {
         
 //        print(lat)
+        
 //        print(lon)
         
         let url = URL(string: "http://api.openweathermap.org/data/2.5/uvi?appid=\(apiKeys.openWeatherMapAPIKey)&lat=\(lat)&lon=\(lon)")
@@ -151,12 +155,28 @@ class ViewController: UIViewController {
                         let jsonResult = try JSONSerialization.jsonObject(with: urlContent, options: JSONSerialization.ReadingOptions.mutableContainers) as AnyObject
                         
 //                        print(jsonResult)
+                        
+                        // http://openweathermap.org/img/w/10d.png '10d' for 'icon'
 
 //                        print(jsonResult["name"])
                         
                         if let city = jsonResult["name"] as? String {
                             
                             self.city = city
+                            
+                        }
+                        
+                        if let weatherDict = jsonResult["weather"] as? [[String: Any]] {
+                            
+//                            print(weatherDict)
+                            
+                            if let icon = weatherDict[0]["icon"] as? String {
+                                
+//                                print(icon)
+                                
+                                self.iconForPngDisplay = icon
+                                
+                            }
                             
                         }
                         
@@ -176,7 +196,7 @@ class ViewController: UIViewController {
 
                         DispatchQueue.main.async {
 
-                            self.tempLabel.text = "\(self.city):\n\(String(self.temperature))°C\nUV: \(self.uvIndex)"
+                            self.tempLabel.text = "\(self.city):\n\(String(self.temperature))°C\nUV: \(self.uvIndex)\n\(self.iconForPngDisplay)"
 
                         }
                         
