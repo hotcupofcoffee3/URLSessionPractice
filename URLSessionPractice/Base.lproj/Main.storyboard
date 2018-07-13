@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4bG-bh-hb7">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4bG-bh-hb7">
                                 <rect key="frame" x="0.0" y="20" width="375" height="375"/>
                                 <color key="backgroundColor" red="0.4786129422" green="0.75449167530000005" blue="0.77631687329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -61,15 +61,24 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EeQ-up-HUA">
+                                <rect key="frame" x="285" y="577" width="90" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="1xj-Zs-Olx"/>
+                                    <constraint firstAttribute="width" constant="90" id="7Jh-TW-4XC"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Xga-ih-060" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="BhB-jN-uuS"/>
                             <constraint firstItem="JJu-Rb-jeh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Bi1-ru-iPa"/>
                             <constraint firstItem="4bG-bh-hb7" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="FDh-dW-0YX"/>
+                            <constraint firstItem="EeQ-up-HUA" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="FVF-X9-gGm"/>
                             <constraint firstItem="JJu-Rb-jeh" firstAttribute="top" secondItem="4bG-bh-hb7" secondAttribute="bottom" constant="20" id="L20-Uk-tyV"/>
                             <constraint firstItem="4bG-bh-hb7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="YEc-EZ-vBo"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Xga-ih-060" secondAttribute="trailing" id="ZsN-p7-ylR"/>
+                            <constraint firstItem="EeQ-up-HUA" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="b1n-ig-5CM"/>
                             <constraint firstItem="Xga-ih-060" firstAttribute="top" secondItem="JJu-Rb-jeh" secondAttribute="bottom" constant="20" id="ezj-zi-6nj"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4bG-bh-hb7" secondAttribute="trailing" id="gYE-6c-yff"/>
                         </constraints>
@@ -78,6 +87,7 @@
                     <connections>
                         <outlet property="image" destination="4bG-bh-hb7" id="0Co-LN-Ssq"/>
                         <outlet property="tempLabel" destination="Xga-ih-060" id="IR1-WH-JDB"/>
+                        <outlet property="weatherIcon" destination="EeQ-up-HUA" id="QTM-hV-KHn"/>
                         <outlet property="zipTextField" destination="xY9-ht-zIR" id="lEb-O0-jYU"/>
                     </connections>
                 </viewController>

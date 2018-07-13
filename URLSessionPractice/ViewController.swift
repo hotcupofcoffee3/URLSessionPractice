@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var image: UIImageView!
     
+    @IBOutlet weak var weatherIcon: UIImageView!
+    
     @IBOutlet weak var tempLabel: UILabel!
     
     @IBOutlet weak var zipTextField: UITextField!
@@ -40,6 +42,8 @@ class ViewController: UIViewController {
     var weatherDescription = String()
     
     let apiKeys = API()
+    
+    let unsplashAPI = UnsplashAPICall()
     
     
     
@@ -158,8 +162,6 @@ class ViewController: UIViewController {
                         
 //                        print(jsonResult)
                         
-                        // http://openweathermap.org/img/w/10d.png '10d' for 'icon'
-
 //                        print(jsonResult["name"])
                         
                         if let city = jsonResult["name"] as? String {
@@ -182,7 +184,7 @@ class ViewController: UIViewController {
                             
                             if let weatherDesc = weatherDict[0]["description"] as? String {
                                 
-//                                print(weatherDesc)
+                                print(weatherDesc)
                                 
                                 self.weatherDescription = weatherDesc
                                 
@@ -206,7 +208,15 @@ class ViewController: UIViewController {
 
                         DispatchQueue.main.async {
 
-                            self.tempLabel.text = "\(self.city):\n\(String(self.temperature))°C\nUV: \(self.uvIndex)\n\(self.iconForPngDisplay)"
+                            self.tempLabel.text = "\(self.city):\n\(String(self.temperature))°C\nUV: \(self.uvIndex)"
+                            
+                            let imageURL = URL(string: "http://openweathermap.org/img/w/\(self.iconForPngDisplay).png")
+
+                            let imageData = try! Data(contentsOf: imageURL!)
+
+                            self.weatherIcon.image = UIImage(data: imageData)
+                            
+                            self.unsplashAPI.getAndSetImage(descriptionQuery: self.weatherDescription, image: self.image)
 
                         }
                         
@@ -229,10 +239,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         tempLabel.text = ""
-        
-//        getCurrentTemperature(zipCode: 79922)
-//        
-//        let url = URL(string: "https://api.unsplash.com/photos/random?client_id=\(apiKeys.unsplashClientID)&page=1&query=snowy")
+     
+//        let url = URL(string: "https://api.unsplash.com/photos/random?client_id=\(apiKeys.unsplashClientID)&page=1&query=overcast%20clouds")
 //
 //        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
 //
