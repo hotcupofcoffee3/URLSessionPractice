@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var image: UIImageView!
     
@@ -19,15 +19,23 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var zipTextField: UITextField!
     
-    @IBAction func getTempButton(_ sender: UIButton) {
+    @IBOutlet weak var goButton: UIButton!
+    
+    func getWeatherAndImage(zipCode: String) {
         
-        if let zip = Int(zipTextField.text!) {
+        if let zip = Int(zipCode) {
             
             getTempAndUVIndexFromZip(zip: zip)
             
         }
         
         zipTextField.text = ""
+        
+    }
+    
+    @IBAction func getTempButton(_ sender: UIButton) {
+        
+        getWeatherAndImage(zipCode: zipTextField.text!)
         
     }
     
@@ -244,6 +252,20 @@ class ViewController: UIViewController {
         
         tempLabel.text = ""
         
+        self.zipTextField.delegate = self
+        
+        self.goButton.layer.cornerRadius = 6
+        
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.zipTextField.resignFirstResponder()
+        self.getWeatherAndImage(zipCode: zipTextField.text!)
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.zipTextField.endEditing(true)
     }
 
     override func didReceiveMemoryWarning() {

@@ -105,6 +105,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="goButton" destination="I2k-ou-qnz" id="cwM-tW-zNL"/>
                         <outlet property="image" destination="4bG-bh-hb7" id="0Co-LN-Ssq"/>
                         <outlet property="tempLabel" destination="Xga-ih-060" id="IR1-WH-JDB"/>
                         <outlet property="weatherIcon" destination="EeQ-up-HUA" id="QTM-hV-KHn"/>
