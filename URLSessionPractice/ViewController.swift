@@ -37,6 +37,8 @@ class ViewController: UIViewController {
     
     var iconForPngDisplay = String()
     
+    var weatherDescription = String()
+    
     let apiKeys = API()
     
     
@@ -175,6 +177,14 @@ class ViewController: UIViewController {
 //                                print(icon)
                                 
                                 self.iconForPngDisplay = icon
+                                
+                            }
+                            
+                            if let weatherDesc = weatherDict[0]["description"] as? String {
+                                
+//                                print(weatherDesc)
+                                
+                                self.weatherDescription = weatherDesc
                                 
                             }
                             
