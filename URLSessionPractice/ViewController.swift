@@ -45,9 +45,6 @@ class ViewController: UIViewController {
     
     let unsplashAPI = UnsplashAPICall()
     
-    
-    
-    
     func getTempAndUVIndexFromZip(zip: Int) {
         
         let geocoder = CLGeocoder()
@@ -57,6 +54,9 @@ class ViewController: UIViewController {
             if error != nil {
                 
                 print(error!)
+                
+                self.tempLabel.text = "Invalid ZIP"
+                
                 
             } else {
                 
@@ -95,7 +95,9 @@ class ViewController: UIViewController {
         let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
             
             if error != nil {
+                
                 print(error!)
+                
             } else {
                 
                 if let urlContent = data {
@@ -151,7 +153,9 @@ class ViewController: UIViewController {
         let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
             
             if error != nil {
+                
                 print(error!)
+                
             } else {
                 
                 if let urlContent = data {
@@ -184,7 +188,7 @@ class ViewController: UIViewController {
                             
                             if let weatherDesc = weatherDict[0]["description"] as? String {
                                 
-                                print(weatherDesc)
+//                                print(weatherDesc)
                                 
                                 self.weatherDescription = weatherDesc
                                 
@@ -208,7 +212,7 @@ class ViewController: UIViewController {
 
                         DispatchQueue.main.async {
 
-                            self.tempLabel.text = "\(self.city):\n\(String(self.temperature))°C\nUV: \(self.uvIndex)"
+                            self.tempLabel.text = "\(self.city):\n\(String(format: "%0.0f", self.temperature)) °C"
                             
                             let imageURL = URL(string: "http://openweathermap.org/img/w/\(self.iconForPngDisplay).png")
 
@@ -239,62 +243,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         tempLabel.text = ""
-     
-//        let url = URL(string: "https://api.unsplash.com/photos/random?client_id=\(apiKeys.unsplashClientID)&page=1&query=overcast%20clouds")
-//
-//        let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
-//
-//            if error != nil {
-//                print(error!)
-//            } else {
-//
-//                if let urlContent = data {
-//
-//                    do {
-//
-//                        let jsonResult = try JSONSerialization.jsonObject(with: urlContent, options: JSONSerialization.ReadingOptions.mutableContainers) as AnyObject
-//
-////                        print(jsonResult)
-//
-////                        print(jsonResult["urls"])
-//
-//                        let urls = jsonResult["urls"] as? [String: String]
-//
-////                        print(urls)
-//                        if let urls = urls {
-//
-//                            if let fullURL = urls["full"] {
-//
-////                                print(fullURL)
-//
-//                                DispatchQueue.main.async {
-//
-//                                    let imageURL = URL(string: fullURL)
-//
-//                                    let imageData = try! Data(contentsOf: imageURL!)
-//
-//                                    self.image.image = UIImage(data: imageData)
-//
-//                                }
-//
-//
-//                            }
-//
-//                        }
-//
-//
-//                    } catch {
-//
-//                        print("JSON Processing Error.")
-//
-//                    }
-//
-//                }
-//
-//            }
-//
-//        }
-//        task.resume()
         
     }
 
