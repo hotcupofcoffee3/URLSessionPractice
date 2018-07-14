@@ -53,6 +53,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     let unsplashAPI = UnsplashAPICall()
     
+    let savedData = SaveAndLoad()
+    
     func getTempAndUVIndexFromZip(zip: Int) {
         
         let geocoder = CLGeocoder()
@@ -219,6 +221,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
 //                        print(self.temperature)
 
                         DispatchQueue.main.async {
+                            
+                            self.savedData.addWeatherData(city: self.city, iconNumber: self.iconForPngDisplay, temperature: self.temperature, uvIndex: self.uvIndex)
 
                             self.tempLabel.text = "\(self.city):\n\(String(format: "%0.0f", self.temperature)) °C"
                             
@@ -228,7 +232,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
                             self.weatherIcon.image = UIImage(data: imageData)
                             
-                            self.unsplashAPI.getAndSetImage(descriptionQuery: self.weatherDescription, image: self.image)
+//                            self.unsplashAPI.getAndSetImage(descriptionQuery: self.weatherDescription, image: self.image)
 
                         }
                         
@@ -249,6 +253,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        savedData.loadWeatherData()
+        
+        if !savedData.weatherDetails.isEmpty {
+            
+            print(savedData.weatherDetails[0].city!)
+            print(savedData.weatherDetails[0].iconNumber!)
+            print(savedData.weatherDetails[0].temperature)
+            print(savedData.weatherDetails[0].uvIndex)
+            
+        }
         
         tempLabel.text = ""
         
