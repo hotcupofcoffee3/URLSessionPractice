@@ -53,7 +53,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     let unsplashAPI = UnsplashAPICall()
     
-    let savedData = SaveAndLoad()
+    let saveAndLoad = SaveAndLoad()
     
     func getTempAndUVIndexFromZip(zip: Int) {
         
@@ -135,6 +135,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
 //                        print(jsonResult["main"])
                         
                         DispatchQueue.main.async {
+                            
+                            self.saveAndLoad.saveUVIndex(uvIndex: self.uvIndex)
                             
                             self.getCurrentTemperature(zipCode: zip)
                             
@@ -222,15 +224,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
                         DispatchQueue.main.async {
                             
-                            self.savedData.addWeatherData(city: self.city, iconNumber: self.iconForPngDisplay, temperature: self.temperature, uvIndex: self.uvIndex)
-
-                            self.tempLabel.text = "\(self.city):\n\(String(format: "%0.0f", self.temperature)) °C"
+                            self.saveAndLoad.saveCity(city: self.city)
                             
-                            let imageURL = URL(string: "http://openweathermap.org/img/w/\(self.iconForPngDisplay).png")
-
-                            let imageData = try! Data(contentsOf: imageURL!)
-
-                            self.weatherIcon.image = UIImage(data: imageData)
+                            self.saveAndLoad.saveIconNumber(iconNumber: self.iconForPngDisplay)
+                            
+                            self.saveAndLoad.saveTemperature(temperature: self.temperature)
+                            
+                            self.updateUI(city: self.city, iconForPngDisplay: self.iconForPngDisplay, temperature: self.temperature)
                             
 //                            self.unsplashAPI.getAndSetImage(descriptionQuery: self.weatherDescription, image: self.image)
 
@@ -251,21 +251,80 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    func updateUI(city: String, iconForPngDisplay: String, temperature: Double) {
+        
+        tempLabel.text = "\(city):\n\(String(format: "%0.1f", temperature)) °C"
+        
+        let imageURL = URL(string: "http://openweathermap.org/img/w/\(iconForPngDisplay).png")
+        
+        let imageData = try! Data(contentsOf: imageURL!)
+        
+        weatherIcon.image = UIImage(data: imageData)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        savedData.loadWeatherData()
+        let date = Date()
         
-        if !savedData.weatherDetails.isEmpty {
+        let calendar = Calendar.current
+        
+        let month = calendar.component(.month, from: date)
+        
+        print(month)
+        
+        
+        if UserDefaults.standard.object(forKey: "weatherInfo") == nil {
             
-            print(savedData.weatherDetails[0].city!)
-            print(savedData.weatherDetails[0].iconNumber!)
-            print(savedData.weatherDetails[0].temperature)
-            print(savedData.weatherDetails[0].uvIndex)
+            UserDefaults.standard.set(true, forKey: "weatherInfo")
+            
+            let initialWeatherDataSetup = WeatherDetails(context: saveAndLoad.context)
+            
+            initialWeatherDataSetup.city = ""
+            initialWeatherDataSetup.iconNumber = ""
+            initialWeatherDataSetup.temperature = 0.0
+            
+            saveAndLoad.saveData()
+            
+        } else {
+            
+            if !saveAndLoad.weatherDetails.isEmpty {
+                
+                let city = saveAndLoad.weatherDetails[0].city!
+                let iconNumber = saveAndLoad.weatherDetails[0].iconNumber!
+                let temperature = saveAndLoad.weatherDetails[0].temperature
+//                let uvIndex = saveAndLoad.weatherDetails[0].uvIndex
+                
+                updateUI(city: city, iconForPngDisplay: iconNumber, temperature: temperature)
+                
+//                print(saveAndLoad.weatherDetails[0].city!)
+//                print(saveAndLoad.weatherDetails[0].iconNumber!)
+//                print(saveAndLoad.weatherDetails[0].temperature)
+//                print(saveAndLoad.weatherDetails[0].uvIndex)
+                
+            }
             
         }
         
-        tempLabel.text = ""
+        
+        
+
+        
+        
+        // Image as Data and vice versa
+        
+//        let imageToBeData: UIImage = UIImage(named: "imageForData.png")!
+        
+//        let imageData: Data = UIImagePNGRepresentation(imageToBeData)!
+        
+//        print(imageData)
+        
+        
+        
+        
+        
+//        tempLabel.text = ""
         
         self.zipTextField.delegate = self
         

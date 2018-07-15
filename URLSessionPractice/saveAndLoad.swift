@@ -32,19 +32,6 @@ class SaveAndLoad {
         
     }
     
-    func addWeatherData(city: String, iconNumber: String, temperature: Double, uvIndex: Double) {
-        
-        let weatherData = WeatherDetails(context: context)
-        
-        weatherData.city = city
-        weatherData.iconNumber = iconNumber
-        weatherData.temperature = temperature
-        weatherData.uvIndex = uvIndex
-        
-        saveData()
-        
-    }
-    
     func addUnsplashImages(clouds: Data, rain: Data, snow: Data, storm: Data, sunny: Data) {
         
         let unsplash = UnsplashImages(context: context)
@@ -59,6 +46,12 @@ class SaveAndLoad {
         
     }
     
+    init() {
+        
+        loadWeatherData()
+        
+    }
+    
     func loadWeatherData() {
         
         let request: NSFetchRequest<WeatherDetails> = WeatherDetails.fetchRequest()
@@ -70,6 +63,54 @@ class SaveAndLoad {
         } catch {
             
             print("Could not load Weather Data: \(error)")
+            
+        }
+        
+    }
+    
+    func saveCity(city: String) {
+        
+        if !weatherDetails.isEmpty {
+            
+            weatherDetails[0].city = city
+            
+            saveData()
+            
+        }
+        
+    }
+    
+    func saveIconNumber(iconNumber: String) {
+        
+        if !weatherDetails.isEmpty {
+            
+            weatherDetails[0].iconNumber = iconNumber
+            
+            saveData()
+            
+        }
+        
+    }
+    
+    func saveTemperature(temperature: Double) {
+        
+        if !weatherDetails.isEmpty {
+            
+            weatherDetails[0].temperature = temperature
+            
+            saveData()
+            
+        }
+        
+    }
+    
+    func saveUVIndex(uvIndex: Double) {
+        
+        if !weatherDetails.isEmpty {
+            
+            weatherDetails[0].uvIndex = uvIndex
+            
+            saveData()
             
         }
         
