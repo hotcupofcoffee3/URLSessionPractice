@@ -266,14 +266,33 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let date = Date()
-        
-        let calendar = Calendar.current
-        
-        let month = calendar.component(.month, from: date)
-        
-        print(month)
-        
+        if UserDefaults.standard.object(forKey: "month") == nil {
+            
+            let month = saveAndLoad.getMonth()
+            
+            UserDefaults.standard.set(month, forKey: "month")
+            
+        } else {
+            
+            let setMonth = UserDefaults.standard.object(forKey: "month") as! Int
+            
+            let currentMonth = saveAndLoad.getMonth()
+            
+            if setMonth != currentMonth {
+                
+                UserDefaults.standard.set(currentMonth, forKey: "month")
+                
+                // Download new images to save
+                // Save new images
+                // Load these new images
+                
+            } else {
+                
+                // Load saved images
+                
+            }
+            
+        }
         
         if UserDefaults.standard.object(forKey: "weatherInfo") == nil {
             

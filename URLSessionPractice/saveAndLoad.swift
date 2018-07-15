@@ -132,4 +132,23 @@ class SaveAndLoad {
         
     }
     
+    func getMonth() -> Int {
+        
+        let date = Date()
+        
+        let calendar = Calendar.current
+        
+        let month = calendar.component(.month, from: date)
+        
+        print(month)
+        
+        return month
+        
+    }
+    
 }
+
+
+
+
+
