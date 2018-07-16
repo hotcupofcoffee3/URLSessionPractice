@@ -200,15 +200,22 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             
                             if let weatherDesc = weatherDict[0]["description"] as? String {
                                 
-//                                print(weatherDesc)
+                                print(weatherDesc)
                                 
-//                                var keyword = String()
+                                // Set certain things to put for each case of the 'weatherDesc', such as for 'clear sky', etc.
+                                // 'snow' 'rain/drizzle' 'thunderstorm', etc.
                                 
-                                if weatherDesc.lowercased().range(of:"swift") != nil {
-                                    print("exists")
+                                var chosenKeyword = String()
+                                
+                                for keyword in self.unsplashModel.arrayOfKeyWords {
+                                    
+                                    if weatherDesc.lowercased().range(of:keyword) != nil {
+                                        chosenKeyword = keyword
+                                    }
+                                    
                                 }
                                 
-                                self.weatherDescription = weatherDesc
+                                self.weatherDescription = chosenKeyword
                                 
                             }
                             
@@ -235,6 +242,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             self.weatherModel.saveIconNumber(iconNumber: self.iconForPngDisplay)
                             
                             self.weatherModel.saveTemperature(temperature: self.temperature)
+                            
+                            self.weatherModel.saveKeyword(keyword: self.weatherDescription)
                             
                             self.updateUI(city: self.city, iconForPngDisplay: self.iconForPngDisplay, temperature: self.temperature, keyword: self.weatherDescription)
                             
@@ -267,6 +276,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         weatherIcon.image = UIImage(data: imageData)
         
+        print(keyword)
+        
     }
     
     override func viewDidLoad() {
@@ -279,6 +290,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             UserDefaults.standard.set(month, forKey: "month")
             
+            unsplashModel.downloadAndSaveAllImages()
+            
+            print("Just downloaded initial images")
+            
         } else {
             
             let setMonth = UserDefaults.standard.object(forKey: "month") as! Int
@@ -290,10 +305,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 UserDefaults.standard.set(currentMonth, forKey: "month")
                 
                 unsplashModel.downloadAndSaveAllImages()
+                print("Just downloaded images")
                 
             } else {
                 
                 // Load saved images
+                print("Just loaded images")
                 
             }
             
