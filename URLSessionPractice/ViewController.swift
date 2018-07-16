@@ -264,9 +264,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         
-        unsplashModel.downloadAndSaveAllImages()
+        super.viewDidLoad()
         
         if UserDefaults.standard.object(forKey: "month") == nil {
             
@@ -317,12 +316,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 let temperature = weatherModel.weatherDetails[0].temperature
 //                let uvIndex = saveAndLoad.weatherDetails[0].uvIndex
                 
-                updateUI(city: city, iconForPngDisplay: iconNumber, temperature: temperature)
+                if iconNumber != "" {
                 
-//                print(saveAndLoad.weatherDetails[0].city!)
-//                print(saveAndLoad.weatherDetails[0].iconNumber!)
-//                print(saveAndLoad.weatherDetails[0].temperature)
-//                print(saveAndLoad.weatherDetails[0].uvIndex)
+                    updateUI(city: city, iconForPngDisplay: iconNumber, temperature: temperature)
+                
+                }
+                
+//                print(weatherModel.weatherDetails[0].city!)
+//                print(weatherModel.weatherDetails[0].iconNumber!)
+//                print(weatherModel.weatherDetails[0].temperature)
+//                print(weatherModel.weatherDetails[0].uvIndex)
                 
             }
             
