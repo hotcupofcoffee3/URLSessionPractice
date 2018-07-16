@@ -38,9 +38,7 @@ class UnsplashModel {
     
     var unsplashImages = [UnsplashImages]()
     
-//    let arrayOfKeyWords = ["clouds", "rain", "snow", "storm", "sunny"]
-    
-    let arrayOfKeyWords = ["clouds", "rain"]
+    let arrayOfKeyWords = ["clouds", "rain", "snow", "storm", "sunny"]
     
     
     
@@ -143,11 +141,6 @@ class UnsplashModel {
             
             self.loadUnsplashImages()
             
-            for image in self.unsplashImages {
-                
-                print("\(image.keyword!): \(image.imageData!)")
-                
-            }
         }
         
     }
@@ -172,11 +165,29 @@ class UnsplashModel {
         
     }
     
-    init() {
+    func loadSpecificImage(keyword: String) -> UIImage {
         
-        loadUnsplashImages()
+        var specificImage = UIImage()
+        
+        for image in unsplashImages {
+            
+            if image.keyword == keyword {
+                
+                specificImage = returnImageFromSavedData(imageData: image.imageData!)
+                
+            }
+            
+        }
+        
+        return specificImage
         
     }
+    
+//    init() {
+//        
+//        loadUnsplashImages()
+//        
+//    }
     
     
     
@@ -201,6 +212,16 @@ class UnsplashModel {
         return month
         
     }
+    
+    
+    
+    // Image to Data
+    
+    //        let imageToBeData: UIImage = UIImage(named: "imageForData.png")!
+    
+    //        let imageData: Data = UIImagePNGRepresentation(imageToBeData)!
+    
+    
     
 }
 

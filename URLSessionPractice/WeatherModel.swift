@@ -96,6 +96,18 @@ class WeatherModel {
         
     }
     
+    func saveKeyword(keyword: String) {
+        
+        if !weatherDetails.isEmpty {
+            
+            weatherDetails[0].keyword = keyword
+            
+            saveData()
+            
+        }
+        
+    }
+    
     
     
     // MARK: - Load Weather

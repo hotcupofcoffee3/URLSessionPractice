@@ -7,11 +7,12 @@
     <entity name="WeatherDetails" representedClassName="WeatherDetails" syncable="YES" codeGenerationType="class">
         <attribute name="city" attributeType="String" syncable="YES"/>
         <attribute name="iconNumber" attributeType="String" syncable="YES"/>
+        <attribute name="keyword" attributeType="String" syncable="YES"/>
         <attribute name="temperature" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="uvIndex" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
         <element name="UnsplashImages" positionX="-63" positionY="18" width="128" height="75"/>
-        <element name="WeatherDetails" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="WeatherDetails" positionX="-63" positionY="-18" width="128" height="120"/>
     </elements>
 </model>

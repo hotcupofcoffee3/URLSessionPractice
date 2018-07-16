@@ -202,6 +202,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                 
 //                                print(weatherDesc)
                                 
+//                                var keyword = String()
+                                
+                                if weatherDesc.lowercased().range(of:"swift") != nil {
+                                    print("exists")
+                                }
+                                
                                 self.weatherDescription = weatherDesc
                                 
                             }
@@ -230,7 +236,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             
                             self.weatherModel.saveTemperature(temperature: self.temperature)
                             
-                            self.updateUI(city: self.city, iconForPngDisplay: self.iconForPngDisplay, temperature: self.temperature)
+                            self.updateUI(city: self.city, iconForPngDisplay: self.iconForPngDisplay, temperature: self.temperature, keyword: self.weatherDescription)
                             
 //                            self.unsplashAPI.getAndSetImage(descriptionQuery: self.weatherDescription, image: self.image)
 
@@ -251,7 +257,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    func updateUI(city: String, iconForPngDisplay: String, temperature: Double) {
+    func updateUI(city: String, iconForPngDisplay: String, temperature: Double, keyword: String) {
         
         tempLabel.text = "\(city):\n\(String(format: "%0.1f", temperature)) °C"
         
@@ -283,9 +289,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 
                 UserDefaults.standard.set(currentMonth, forKey: "month")
                 
-                // Download new images to save
-                // Save new images
-                // Load these new images
+                unsplashModel.downloadAndSaveAllImages()
                 
             } else {
                 
@@ -303,6 +307,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             initialWeatherDataSetup.city = ""
             initialWeatherDataSetup.iconNumber = ""
+            initialWeatherDataSetup.keyword = ""
             initialWeatherDataSetup.temperature = 0.0
             
             weatherModel.saveData()
@@ -313,12 +318,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 
                 let city = weatherModel.weatherDetails[0].city!
                 let iconNumber = weatherModel.weatherDetails[0].iconNumber!
+                let keyword = weatherModel.weatherDetails[0].keyword!
                 let temperature = weatherModel.weatherDetails[0].temperature
 //                let uvIndex = saveAndLoad.weatherDetails[0].uvIndex
                 
                 if iconNumber != "" {
                 
-                    updateUI(city: city, iconForPngDisplay: iconNumber, temperature: temperature)
+                    updateUI(city: city, iconForPngDisplay: iconNumber, temperature: temperature, keyword: keyword)
                 
                 }
                 
@@ -332,24 +338,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
         
-        
 
-        
-        
-        // Image as Data and vice versa
-        
-//        let imageToBeData: UIImage = UIImage(named: "imageForData.png")!
-        
-//        let imageData: Data = UIImagePNGRepresentation(imageToBeData)!
-        
-//        print(imageData)
-        
-        
-        
-        
-        
-//        tempLabel.text = ""
-        
         self.zipTextField.delegate = self
         
         self.goButton.layer.cornerRadius = 6
