@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17F77" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="UnsplashImages" representedClassName="UnsplashImages" syncable="YES" codeGenerationType="class">
-        <attribute name="clouds" attributeType="Binary" syncable="YES"/>
-        <attribute name="rain" attributeType="Binary" syncable="YES"/>
-        <attribute name="snow" attributeType="Binary" syncable="YES"/>
-        <attribute name="storm" attributeType="Binary" syncable="YES"/>
-        <attribute name="sunny" attributeType="Binary" syncable="YES"/>
+        <attribute name="imageData" attributeType="Binary" syncable="YES"/>
+        <attribute name="keyword" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="WeatherDetails" representedClassName="WeatherDetails" syncable="YES" codeGenerationType="class">
         <attribute name="city" attributeType="String" syncable="YES"/>
@@ -14,7 +11,7 @@
         <attribute name="uvIndex" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
+        <element name="UnsplashImages" positionX="-63" positionY="18" width="128" height="75"/>
         <element name="WeatherDetails" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="UnsplashImages" positionX="-63" positionY="18" width="128" height="120"/>
     </elements>
 </model>

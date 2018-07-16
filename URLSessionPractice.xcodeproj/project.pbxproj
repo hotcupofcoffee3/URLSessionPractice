@@ -13,9 +13,9 @@
 		B5098BAB20E3D0E2007B8B81 /* URLSessionPractice.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5098BA920E3D0E2007B8B81 /* URLSessionPractice.xcdatamodeld */; };
 		B5098BAD20E3D0E4007B8B81 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5098BAC20E3D0E4007B8B81 /* Assets.xcassets */; };
 		B5098BB020E3D0E4007B8B81 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5098BAE20E3D0E4007B8B81 /* LaunchScreen.storyboard */; };
-		B524B32320F5573E00CC56D5 /* apiID.swift in Sources */ = {isa = PBXBuildFile; fileRef = B524B32220F5573E00CC56D5 /* apiID.swift */; };
-		B530159920FAA917006D1765 /* saveAndLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = B530159820FAA917006D1765 /* saveAndLoad.swift */; };
-		B580B51820F8F7EE00558FB7 /* unsplashAPICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = B580B51720F8F7EE00558FB7 /* unsplashAPICall.swift */; };
+		B524B32320F5573E00CC56D5 /* ApiID.swift in Sources */ = {isa = PBXBuildFile; fileRef = B524B32220F5573E00CC56D5 /* ApiID.swift */; };
+		B530159920FAA917006D1765 /* UnsplashModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B530159820FAA917006D1765 /* UnsplashModel.swift */; };
+		B5DEAF9E20FD126D004027D0 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DEAF9D20FD126D004027D0 /* WeatherModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,9 +27,9 @@
 		B5098BAC20E3D0E4007B8B81 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5098BAF20E3D0E4007B8B81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B5098BB120E3D0E4007B8B81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B524B32220F5573E00CC56D5 /* apiID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = apiID.swift; sourceTree = "<group>"; };
-		B530159820FAA917006D1765 /* saveAndLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = saveAndLoad.swift; sourceTree = "<group>"; };
-		B580B51720F8F7EE00558FB7 /* unsplashAPICall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = unsplashAPICall.swift; sourceTree = "<group>"; };
+		B524B32220F5573E00CC56D5 /* ApiID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiID.swift; sourceTree = "<group>"; };
+		B530159820FAA917006D1765 /* UnsplashModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashModel.swift; sourceTree = "<group>"; };
+		B5DEAF9D20FD126D004027D0 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,9 +64,9 @@
 			children = (
 				B5098BA220E3D0E2007B8B81 /* AppDelegate.swift */,
 				B5098BA420E3D0E2007B8B81 /* ViewController.swift */,
-				B580B51720F8F7EE00558FB7 /* unsplashAPICall.swift */,
-				B524B32220F5573E00CC56D5 /* apiID.swift */,
-				B530159820FAA917006D1765 /* saveAndLoad.swift */,
+				B524B32220F5573E00CC56D5 /* ApiID.swift */,
+				B5DEAF9D20FD126D004027D0 /* WeatherModel.swift */,
+				B530159820FAA917006D1765 /* UnsplashModel.swift */,
 				B5098BA620E3D0E2007B8B81 /* Main.storyboard */,
 				B5098BAC20E3D0E4007B8B81 /* Assets.xcassets */,
 				B5098BAE20E3D0E4007B8B81 /* LaunchScreen.storyboard */,
@@ -148,11 +148,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5098BA520E3D0E2007B8B81 /* ViewController.swift in Sources */,
-				B524B32320F5573E00CC56D5 /* apiID.swift in Sources */,
+				B524B32320F5573E00CC56D5 /* ApiID.swift in Sources */,
 				B5098BA320E3D0E2007B8B81 /* AppDelegate.swift in Sources */,
 				B5098BAB20E3D0E2007B8B81 /* URLSessionPractice.xcdatamodeld in Sources */,
-				B530159920FAA917006D1765 /* saveAndLoad.swift in Sources */,
-				B580B51820F8F7EE00558FB7 /* unsplashAPICall.swift in Sources */,
+				B530159920FAA917006D1765 /* UnsplashModel.swift in Sources */,
+				B5DEAF9E20FD126D004027D0 /* WeatherModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

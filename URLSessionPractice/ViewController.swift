@@ -49,11 +49,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     var weatherDescription = String()
     
+    let weatherModel = WeatherModel()
+    
+    let unsplashModel = UnsplashModel()
+    
     let apiKeys = API()
-    
-    let unsplashAPI = UnsplashAPICall()
-    
-    let saveAndLoad = SaveAndLoad()
     
     func getTempAndUVIndexFromZip(zip: Int) {
         
@@ -136,7 +136,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                         
                         DispatchQueue.main.async {
                             
-                            self.saveAndLoad.saveUVIndex(uvIndex: self.uvIndex)
+                            self.weatherModel.saveUVIndex(uvIndex: self.uvIndex)
                             
                             self.getCurrentTemperature(zipCode: zip)
                             
@@ -224,11 +224,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
                         DispatchQueue.main.async {
                             
-                            self.saveAndLoad.saveCity(city: self.city)
+                            self.weatherModel.saveCity(city: self.city)
                             
-                            self.saveAndLoad.saveIconNumber(iconNumber: self.iconForPngDisplay)
+                            self.weatherModel.saveIconNumber(iconNumber: self.iconForPngDisplay)
                             
-                            self.saveAndLoad.saveTemperature(temperature: self.temperature)
+                            self.weatherModel.saveTemperature(temperature: self.temperature)
                             
                             self.updateUI(city: self.city, iconForPngDisplay: self.iconForPngDisplay, temperature: self.temperature)
                             
@@ -266,9 +266,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        unsplashModel.downloadAndSaveAllImages()
+        
         if UserDefaults.standard.object(forKey: "month") == nil {
             
-            let month = saveAndLoad.getMonth()
+            let month = unsplashModel.returnMonth()
             
             UserDefaults.standard.set(month, forKey: "month")
             
@@ -276,7 +278,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             let setMonth = UserDefaults.standard.object(forKey: "month") as! Int
             
-            let currentMonth = saveAndLoad.getMonth()
+            let currentMonth = unsplashModel.returnMonth()
             
             if setMonth != currentMonth {
                 
@@ -298,21 +300,21 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             UserDefaults.standard.set(true, forKey: "weatherInfo")
             
-            let initialWeatherDataSetup = WeatherDetails(context: saveAndLoad.context)
+            let initialWeatherDataSetup = WeatherDetails(context: weatherModel.context)
             
             initialWeatherDataSetup.city = ""
             initialWeatherDataSetup.iconNumber = ""
             initialWeatherDataSetup.temperature = 0.0
             
-            saveAndLoad.saveData()
+            weatherModel.saveData()
             
         } else {
             
-            if !saveAndLoad.weatherDetails.isEmpty {
+            if !weatherModel.weatherDetails.isEmpty {
                 
-                let city = saveAndLoad.weatherDetails[0].city!
-                let iconNumber = saveAndLoad.weatherDetails[0].iconNumber!
-                let temperature = saveAndLoad.weatherDetails[0].temperature
+                let city = weatherModel.weatherDetails[0].city!
+                let iconNumber = weatherModel.weatherDetails[0].iconNumber!
+                let temperature = weatherModel.weatherDetails[0].temperature
 //                let uvIndex = saveAndLoad.weatherDetails[0].uvIndex
                 
                 updateUI(city: city, iconForPngDisplay: iconNumber, temperature: temperature)
