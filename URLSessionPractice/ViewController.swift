@@ -200,35 +200,35 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                 
                                 // 'snow' 'rain/drizzle' 'thunderstorm', etc.
                                 
-                                var chosenKeyword = String()
+                                var keyword = String()
                                 
                                 if (200...299).contains(id) {
                                     
-                                    chosenKeyword = "thunderstorm"
+                                    keyword = "thunderstorm"
                                     
                                 } else if (300...399).contains(id) || (500...599).contains(id) {
                                     
-                                    chosenKeyword = "rain"
+                                    keyword = "rain"
                                     
                                 } else if (600...699).contains(id) {
                                     
-                                    chosenKeyword = "snow"
+                                    keyword = "snow"
                                     
                                 } else if (700...799).contains(id) {
                                     
-                                    chosenKeyword = "fog"
+                                    keyword = "fog"
                                     
                                 } else if id == 800 {
                                     
-                                    chosenKeyword = "clear sky"
+                                    keyword = "clear sky"
                                     
                                 } else if (801...809).contains(id) {
                                     
-                                    chosenKeyword = "clouds"
+                                    keyword = "clouds"
                                     
                                 }
                                 
-                                self.weatherDescription = chosenKeyword
+                                self.weatherDescription = keyword
                                 
                             }
                             
@@ -268,7 +268,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             
                             self.updateUI(city: self.city, iconForPngDisplay: self.iconForPngDisplay, temperature: self.temperature, keyword: self.weatherDescription)
                             
-//                            self.unsplashAPI.getAndSetImage(descriptionQuery: self.weatherDescription, image: self.image)
+                            self.image.image = self.unsplashModel.loadSpecificImage(keyword: self.weatherDescription)
 
                         }
                         
@@ -297,6 +297,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         weatherIcon.image = UIImage(data: imageData)
         
+        image.image = unsplashModel.loadSpecificImage(keyword: keyword)
+        
 //        print(keyword)
         
     }
@@ -308,35 +310,35 @@ class ViewController: UIViewController, UITextFieldDelegate {
 //        unsplashModel.deleteAllImages()
         
         if UserDefaults.standard.object(forKey: "month") == nil {
-            
+
             let month = unsplashModel.returnMonth()
-            
+
             UserDefaults.standard.set(month, forKey: "month")
-            
+
             unsplashModel.downloadAndSaveAllImages()
-            
+
             print("Just downloaded initial images")
-            
+
         } else {
-            
+
             let setMonth = UserDefaults.standard.object(forKey: "month") as! Int
-            
+
             let currentMonth = unsplashModel.returnMonth()
-            
+
             if setMonth != currentMonth {
-                
+
                 UserDefaults.standard.set(currentMonth, forKey: "month")
-                
+
                 unsplashModel.downloadAndSaveAllImages()
                 print("Just downloaded images")
-                
+
             } else {
-                
+
                 // Load saved images
                 print("Just loaded images")
-                
+
             }
-            
+
         }
         
         if UserDefaults.standard.object(forKey: "weatherInfo") == nil {
@@ -349,6 +351,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             initialWeatherDataSetup.iconNumber = ""
             initialWeatherDataSetup.keyword = ""
             initialWeatherDataSetup.temperature = 0.0
+            image.image = UIImage(named: "initialBackground")
             
             weatherModel.saveData()
             
