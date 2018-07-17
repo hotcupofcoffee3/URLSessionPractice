@@ -188,34 +188,55 @@ class ViewController: UIViewController, UITextFieldDelegate {
                         
                         if let weatherDict = jsonResult["weather"] as? [[String: Any]] {
                             
-//                            print(weatherDict)
+                            print(weatherDict)
+                            
+                            if let id = weatherDict[0]["id"] as? Int {
+                                
+//                                print(weatherDesc)
+                                
+//                                print(id)
+                                
+                                // Set certain things to put for each case of the 'weatherDesc', such as for 'clear sky', etc.
+                                
+                                // 'snow' 'rain/drizzle' 'thunderstorm', etc.
+                                
+                                var chosenKeyword = String()
+                                
+                                if (200...299).contains(id) {
+                                    
+                                    chosenKeyword = "thunderstorm"
+                                    
+                                } else if (300...399).contains(id) || (500...599).contains(id) {
+                                    
+                                    chosenKeyword = "rain"
+                                    
+                                } else if (600...699).contains(id) {
+                                    
+                                    chosenKeyword = "snow"
+                                    
+                                } else if (700...799).contains(id) {
+                                    
+                                    chosenKeyword = "fog"
+                                    
+                                } else if id == 800 {
+                                    
+                                    chosenKeyword = "clear sky"
+                                    
+                                } else if (801...809).contains(id) {
+                                    
+                                    chosenKeyword = "clouds"
+                                    
+                                }
+                                
+                                self.weatherDescription = chosenKeyword
+                                
+                            }
                             
                             if let icon = weatherDict[0]["icon"] as? String {
                                 
 //                                print(icon)
                                 
                                 self.iconForPngDisplay = icon
-                                
-                            }
-                            
-                            if let weatherDesc = weatherDict[0]["description"] as? String {
-                                
-                                print(weatherDesc)
-                                
-                                // Set certain things to put for each case of the 'weatherDesc', such as for 'clear sky', etc.
-                                // 'snow' 'rain/drizzle' 'thunderstorm', etc.
-                                
-                                var chosenKeyword = String()
-                                
-                                for keyword in self.unsplashModel.arrayOfKeyWords {
-                                    
-                                    if weatherDesc.lowercased().range(of:keyword) != nil {
-                                        chosenKeyword = keyword
-                                    }
-                                    
-                                }
-                                
-                                self.weatherDescription = chosenKeyword
                                 
                             }
                             
@@ -276,13 +297,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         weatherIcon.image = UIImage(data: imageData)
         
-        print(keyword)
+//        print(keyword)
         
     }
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+//        unsplashModel.deleteAllImages()
         
         if UserDefaults.standard.object(forKey: "month") == nil {
             

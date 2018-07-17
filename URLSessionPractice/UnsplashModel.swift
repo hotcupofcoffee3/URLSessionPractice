@@ -32,13 +32,27 @@ class UnsplashModel {
         
     }
     
+    func deleteAllImages() {
+        
+        loadUnsplashImages()
+        
+        for image in unsplashImages {
+            
+            context.delete(image)
+            
+        }
+        
+        saveData()
+        
+    }
+    
     
     
     // MARK: - Variables
     
     var unsplashImages = [UnsplashImages]()
     
-    let arrayOfKeyWords = ["clouds", "rain", "snow", "storm", "sunny"]
+    let arrayOfKeyWords = ["thunderstorm", "rain", "snow", "fog", "clear sky", "clouds"]
     
     
     
