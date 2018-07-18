@@ -183,11 +183,17 @@ class UnsplashModel {
         
         var specificImage = UIImage()
         
+//        print(unsplashImages.count)
+        
         for image in unsplashImages {
+            
+//            print(keyword)
             
             if image.keyword == keyword {
                 
                 specificImage = returnImageFromSavedData(imageData: image.imageData!)
+                
+//                print(keyword)
                 
             }
             

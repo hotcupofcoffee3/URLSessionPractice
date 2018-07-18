@@ -188,7 +188,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                         
                         if let weatherDict = jsonResult["weather"] as? [[String: Any]] {
                             
-                            print(weatherDict)
+//                            print(weatherDict)
                             
                             if let id = weatherDict[0]["id"] as? Int {
                                 
@@ -267,9 +267,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             self.weatherModel.saveKeyword(keyword: self.weatherDescription)
                             
                             self.updateUI(city: self.city, iconForPngDisplay: self.iconForPngDisplay, temperature: self.temperature, keyword: self.weatherDescription)
-                            
-                            self.image.image = self.unsplashModel.loadSpecificImage(keyword: self.weatherDescription)
-
+                
                         }
                         
                     } catch {
@@ -296,6 +294,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let imageData = try! Data(contentsOf: imageURL!)
         
         weatherIcon.image = UIImage(data: imageData)
+        
+//        print(keyword)
         
         image.image = unsplashModel.loadSpecificImage(keyword: keyword)
         
@@ -330,12 +330,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 UserDefaults.standard.set(currentMonth, forKey: "month")
 
                 unsplashModel.downloadAndSaveAllImages()
+                
                 print("Just downloaded images")
 
             } else {
 
                 // Load saved images
                 print("Just loaded images")
+                
+                unsplashModel.loadUnsplashImages()
 
             }
 
