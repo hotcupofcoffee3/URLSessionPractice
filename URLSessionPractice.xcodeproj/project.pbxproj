@@ -19,7 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B5098B9F20E3D0E2007B8B81 /* URLSessionPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = URLSessionPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5098B9F20E3D0E2007B8B81 /* UnWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5098BA220E3D0E2007B8B81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5098BA420E3D0E2007B8B81 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B5098BA720E3D0E2007B8B81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -54,7 +54,7 @@
 		B5098BA020E3D0E2007B8B81 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B5098B9F20E3D0E2007B8B81 /* URLSessionPractice.app */,
+				B5098B9F20E3D0E2007B8B81 /* UnWeather.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -93,7 +93,7 @@
 			);
 			name = URLSessionPractice;
 			productName = URLSessionPractice;
-			productReference = B5098B9F20E3D0E2007B8B81 /* URLSessionPractice.app */;
+			productReference = B5098B9F20E3D0E2007B8B81 /* UnWeather.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -304,7 +304,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.luneofthepune.URLSessionPractice;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = UnWeather;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -322,7 +322,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.luneofthepune.URLSessionPractice;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = UnWeather;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
