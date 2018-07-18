@@ -305,6 +305,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         
+        // Portland: 97232
+        // La Jolla: 92037
+        // Chicago: 60605
+        
         super.viewDidLoad()
         
 //        unsplashModel.deleteAllImages()
@@ -368,10 +372,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 let temperature = weatherModel.weatherDetails[0].temperature
 //                let uvIndex = saveAndLoad.weatherDetails[0].uvIndex
                 
-                if iconNumber != "" {
+                if iconNumber != "" && keyword != "" {
                 
                     updateUI(city: city, iconForPngDisplay: iconNumber, temperature: temperature, keyword: keyword)
                 
+                } else {
+                    
+                    image.image = UIImage(named: "initialBackground")
+                    
                 }
                 
 //                print(weatherModel.weatherDetails[0].city!)
